@@ -24,18 +24,11 @@
 
 echo "\nEntering ~/mywifidrivers/rtlwifi_new..."
 cd ~/mywifidrivers/rtlwifi_new/
-echo "\nChanging branch to rock.new_btcoex..."
-git checkout rock.new_btcoex
-git_branch="`git rev-parse --abbrev-ref HEAD`"
-test_branch="rock.new_btcoex"
-if [ $git_branch = $test_branch ]; then
-	make
-	sudo make install
-	echo "\nremoving module 'rtl8723be' ..."
-	sudo modprobe -rv rtl8723be
-	echo "\nadding module 'rtl8723be'..."
-	sudo modprobe -v rtl8723be ips=0 ant_sel=2
-else
-	echo "Not in correct branch, aborting...\n"
-	return -1
-fi
+
+make
+sudo make install
+echo "\nremoving module 'rtl8723be' ..."
+sudo modprobe -rv rtl8723be
+echo "\nadding module 'rtl8723be'..."
+sudo modprobe -v rtl8723be ips=0 ant_sel=2
+
